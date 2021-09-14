@@ -1,0 +1,70 @@
+.row{
+    /*border: 1px dotted darkmagenta;
+    background-color: bisque;*/
+    padding: 2px;
+    margin: 10px 0;
+    display: flex;
+}
+.col-1, .col-3, .col-2, .col-4 .col-5{
+    /*border: 1px solid greenyellow;
+    background-color: #e5f9c5;*/
+    float: left;
+}
+.col-5{
+    min-width: 100%;
+    width: 100%;
+}
+.col-4{
+    min-width: 80%;
+    width: 80%;
+}
+.col-3{
+    min-width: 60%;
+    width: 60%;
+}
+.col-2{
+    min-width: 40%;
+    width: 40%;
+}
+.col-1{
+    min-width: 20%;
+    width: 20%;
+}
+.menu h3{
+    color: darkmagenta;
+    text-align: center;
+}
+.menu{
+    padding: 15px 0;
+  }
+.menu ul{
+    list-style: none;
+}
+.card, .menu {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+.card img {
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+}
+.card .container {
+    padding: 2px 16px;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button1 {background-color: #4CAF50;} /* Green */
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+.button5 {background-color: #555555;} /* Black */
