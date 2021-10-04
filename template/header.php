@@ -46,6 +46,7 @@
                 <li><a class="nav-link  " href="/">Home</a></li>
                 <li><a class="nav-link" href="?page=about">About</a></li>
                 <li><a class="active" href="?page=calc">Калькулятор</a></li>
+                <li><a class="nav-link" href="?page=articles">Статьи</a></li>
                 <li><a class="nav-link" href="?page=contact">Contact</a></li>
 
             </ul>
