@@ -43,6 +43,7 @@ function articleList(){
 }
 
 
+
 function calc(){
     if(isset($_POST['btnCalc'])){
         $message = "нечего считать(((";
