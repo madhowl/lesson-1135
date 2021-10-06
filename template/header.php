@@ -48,7 +48,6 @@
                 <li><a class="active" href="?page=calc">Калькулятор</a></li>
                 <li><a class="nav-link" href="?page=articles">Статьи</a></li>
                 <li><a class="nav-link" href="?page=contact">Contact</a></li>
-
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

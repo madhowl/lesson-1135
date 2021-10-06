@@ -1,5 +1,24 @@
 <?php
+function dd($some){
+    echo '<pre>';
+    print_r($some);
+    echo '</pre>';
 
+};
+function getArticleList(){
+    $dir    = 'content/pages/';
+    $filesList = scandir($dir);
+    dd($filesList);
+    $pages = glob($dir . "*.md");
+    dd($pages);
+    foreach($pages as $page) {
+        $pageName = substr($page, 8);
+        $pageName = substr($pageName, 0, -3);
+        echo "<li><a href=\"index.php?id=".$pageName."\">".$pageName."</a></li>";
+
+    }
+
+};
 function main(){
     if (!isset($_REQUEST['page'])){
         include ('content/pages/main.md');
@@ -8,7 +27,8 @@ function main(){
         switch ($page){
             case 'about': include ('content/pages/about.md');break;
             case 'calc': include ('content/pages/calc.php');break;
-            case 'articles': articleList();break;
+            case 'article': getArticleList();break;
+
             default: include ('content/pages/404.md');
         }
     }
@@ -21,6 +41,7 @@ function articleList(){
         dbg($page);
     }
 }
+<<<<<<< HEAD
 function getFileList($path)
 {
     $file_list =[];
@@ -74,6 +95,8 @@ function ParseURI($uri)
     $uri = explode ("/",$uri);
     return $uri;
 }
+=======
+>>>>>>> flat-blog
 
 
 
