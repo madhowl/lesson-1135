@@ -41,7 +41,6 @@ function articleList(){
         dbg($page);
     }
 }
-<<<<<<< HEAD
 function getFileList($path)
 {
     $file_list =[];
@@ -95,11 +94,6 @@ function ParseURI($uri)
     $uri = explode ("/",$uri);
     return $uri;
 }
-=======
->>>>>>> flat-blog
-
-
-
 function calc(){
     if(isset($_POST['btnCalc'])){
         $message = "нечего считать(((";
