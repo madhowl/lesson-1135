@@ -21,6 +21,37 @@ function articleList(){
         dbg($page);
     }
 }
+function getFileList($path)
+{
+    $file_list =[];
+    foreach(glob($path . '/*.md') as $dir) {
+        if (is_file($dir)) {
+            $file_list[] = basename($dir);
+        }
+    }
+    return $file_list;
+}
+function getContent($path)
+{
+    $page = parseFile ($path);
+    $pageItem['header'] =(array) json_decode ($page[0]);
+    $pageItem['body'] = $page[1];
+    return $pageItem;
+}
+function getFileContent($path)
+{
+    return file_get_contents ($path);
+}
+function parseFile($path)
+{
+    $content = explode ( '===', getFileContent ($path));
+    return $content;
+}
+function dbg($string){
+    echo '<pre>';
+    print_r ($string);
+    echo '</pre>';
+}
 
 function getDirList($path)
 {
@@ -32,32 +63,6 @@ function getDirList($path)
     }
     return $dir_list;
 }
-
-function getFileList($path)
-{
-    $file_list =[];
-    foreach(glob($path . '/*.md') as $dir) {
-        if (is_file($dir)) {
-            $file_list[] = basename($dir);
-        }
-    }
-    return $file_list;
-}
-
-function getContent($path)
-{
-    $page = parseFile ($path);
-    $pageItem['header'] =(array) json_decode ($page[0]);
-    $pageItem['body'] = $page[1];
-    return $pageItem;
-}
-
-function dbg($string){
-    echo '<pre>';
-    print_r ($string);
-    echo '</pre>';
-}
-
 function GetURI()
 {
     return $_SERVER['REQUEST_URI'];
@@ -70,16 +75,7 @@ function ParseURI($uri)
     return $uri;
 }
 
-function getFileContent($path)
-{
-    return file_get_contents ($path);
-}
 
-function parseFile($path)
-{
-    $content = explode ( '===', getFileContent ($path));
-    return $content;
-}
 
 function calc(){
     if(isset($_POST['btnCalc'])){
