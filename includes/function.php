@@ -1,10 +1,10 @@
 <?php
 function getArticleList(){
-    $dir    = 'content/pages/';
+    $dir    = 'content/blog/';
     $filesList = scandir($dir);
-    dd($filesList);
+    dbg($filesList);
     $pages = glob($dir . "*.md");
-    dd($pages);
+    dbg($pages);
     foreach($pages as $page) {
         $pageName = substr($page, 8);
         $pageName = substr($pageName, 0, -3);
@@ -21,7 +21,7 @@ function main(){
         switch ($page){
             case 'about': include ('content/pages/about.md');break;
             case 'calc': include ('content/pages/calc.php');break;
-            case 'article': getArticleList();break;
+            case 'articles': articleList();break;
 
             default: include ('content/pages/404.md');
         }
@@ -32,8 +32,35 @@ function articleList(){
     $file_list = getFileList($path);
     foreach ( $file_list as $file){
         $page = getContent($path.$file);
-        dbg($page);
+        showIntroPage($page);
     }
+}
+function showIntroPage($page){
+    echo '<article class="entry">
+              <div class="entry-img">
+                <img src="'.$page['header']['IntroImage'].'" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">'.$page['header']['Title'].'</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">'.$page['header']['Autor'].'</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="">'.$page['header']['Data'].'</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                '.$page['header']['Intro'].'
+                <div class="read-more">
+                  <a href="#">Read More</a>
+                </div>
+              </div>
+
+            </article>';
 }
 function getFileList($path)
 {
