@@ -1,10 +1,4 @@
 <?php
-function dd($some){
-    echo '<pre>';
-    print_r($some);
-    echo '</pre>';
-
-};
 function getArticleList(){
     $dir    = 'content/pages/';
     $filesList = scandir($dir);
@@ -72,7 +66,6 @@ function dbg($string){
     print_r ($string);
     echo '</pre>';
 }
-
 function getDirList($path)
 {
     $dir_list=[];
@@ -87,7 +80,6 @@ function GetURI()
 {
     return $_SERVER['REQUEST_URI'];
 }
-
 function ParseURI($uri)
 {
     $uri = trim ($uri,'/');
