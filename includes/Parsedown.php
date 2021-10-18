@@ -13,8 +13,6 @@
 #
 #
 
-namespace Core;
-
 class Parsedown
 {
     # ~
@@ -1989,8 +1987,8 @@ class Parsedown
         'q', 'rt', 'ins', 'font',          'strong',
         's', 'tt', 'kbd', 'mark',
         'u', 'xm', 'sub', 'nobr',
-                   'sup', 'ruby',
-                   'var', 'span',
-                   'wbr', 'time',
+        'sup', 'ruby',
+        'var', 'span',
+        'wbr', 'time',
     );
 }

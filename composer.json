@@ -1,0 +1,19 @@
+{
+    "name": "madhowl/1135",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "app/core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MadHowl",
+            "email": "madhowl@yandex.ru"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0",
+        "noahbuscher/macaw": "dev-master"
+    }
+}

@@ -1,9 +1,12 @@
 <?php
-include ('template/header.php');
-require_once ('includes/function.php');
-require_once ('includes/Parsedown.php');
+require('vendor/autoload.php');
+use NoahBuscher\Macaw\Macaw;
 
-main();
+Macaw::get('/', 'App\BlogClass@index');
+Macaw::get('/(:any)', 'App\BlogClass@index');
+Macaw::dispatch();
 
-include_once ("template/footer.php");
+
+
+
 

@@ -22,10 +22,21 @@ function main(){
             case 'about': include ('content/pages/about.md');break;
             case 'calc': include ('content/pages/calc.php');break;
             case 'articles': articleList();break;
-
             default: include ('content/pages/404.md');
         }
     }
+}
+function app(){
+    $uri = getURI();
+    $page = parseURI($uri);
+    switch ($page[0]){
+        case 'about': include ('content/pages/about.md');break;
+        case 'calc': include ('content/pages/calc.php');break;
+        case 'articles': articleList();break;
+        case 'page': showSinglePage($page);break;
+        default: include ('content/pages/404.md');
+    }
+
 }
 function articleList(){
     $path = 'content/blog/';
@@ -35,21 +46,36 @@ function articleList(){
         showIntroPage($page);
     }
 }
+function getFileList($path){
+    $file_list =[];
+    foreach(glob($path . '/*.md') as $dir) {
+        if (is_file($dir)) { $file_list[] = basename($dir);}
+    }
+    return $file_list;
+}
+function getContent($path){
+    $page = parseFile ($path);
+    $pageItem['header'] =(array) json_decode ($page[0]);
+    $pageItem['body'] = $page[1];
+    return $pageItem;
+}
+function parseFile($path){
+    $content = explode ( '===', getFileContent ($path));
+    return $content;
+}
 function showIntroPage($page){
     echo '<article class="entry">
               <div class="entry-img">
                 <img src="'.$page['header']['IntroImage'].'" alt="" class="img-fluid">
               </div>
-
               <h2 class="entry-title">
-                <a href="blog-single.html">'.$page['header']['Title'].'</a>
+                <a href="/page/'.$page['header']['FileName'].'">'.$page['header']['Title'].'</a>
               </h2>
 
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">'.$page['header']['Autor'].'</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="">'.$page['header']['Data'].'</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="">'.$page['header']['Data'].'</time></a></li>                  
                 </ul>
               </div>
 
@@ -59,35 +85,32 @@ function showIntroPage($page){
                   <a href="#">Read More</a>
                 </div>
               </div>
-
             </article>';
 }
-function getFileList($path)
-{
-    $file_list =[];
-    foreach(glob($path . '/*.md') as $dir) {
-        if (is_file($dir)) {
-            $file_list[] = basename($dir);
+function showSinglePage($page){
+    require_once ('includes/Parsedown.php');
+    $Parsedown = new Parsedown();
+    $path = 'content/blog/';
+    $file ='';
+    if (empty($page[1])){
+        include ('content/pages/404.md');
+    }else{
+        if (is_file($path.$page[1])) {
+            $file = basename($path.$page[1]);
+            dbg($file);
+            $page = getContent($path.$file);
+            echo '<article class="entry entry-single">';
+            echo $Parsedown->text($page['body']);
+            echo '</article>';
         }
     }
-    return $file_list;
-}
-function getContent($path)
-{
-    $page = parseFile ($path);
-    $pageItem['header'] =(array) json_decode ($page[0]);
-    $pageItem['body'] = $page[1];
-    return $pageItem;
+
 }
 function getFileContent($path)
 {
     return file_get_contents ($path);
 }
-function parseFile($path)
-{
-    $content = explode ( '===', getFileContent ($path));
-    return $content;
-}
+
 function dbg($string){
     echo '<pre>';
     print_r ($string);
@@ -103,11 +126,11 @@ function getDirList($path)
     }
     return $dir_list;
 }
-function GetURI()
+function getURI()
 {
     return $_SERVER['REQUEST_URI'];
 }
-function ParseURI($uri)
+function parseURI($uri)
 {
     $uri = trim ($uri,'/');
     $uri = explode ("/",$uri);
